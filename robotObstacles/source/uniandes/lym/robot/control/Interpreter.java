@@ -130,11 +130,13 @@ public class Interpreter   {
 		for (int i = 0; i < inst.length; i++) {
 			String entrada = inst[i];
 			try {
+				
 
 				if(entrada.startsWith("VARS"))
 				{
 
 					String cadena = entrada.substring(5);
+					cadena = cadena.replace(" ", "");
 					String[] variables = cadena.split(",");
 					for (int j = 0; j < variables.length; j++) {
 						map.put(variables[j], 0);
@@ -144,7 +146,8 @@ public class Interpreter   {
 				else if(entrada.startsWith("assign"))
 				{
 
-					String cadena = entrada.substring(7, 10);
+					String cadena = entrada.substring(7);
+					cadena = cadena.replace(");", "");
 					String[] parametros = cadena.split(",");
 					int valor = Integer.parseInt(parametros[1]);
 					if(map.containsKey(parametros[0]))
@@ -240,7 +243,7 @@ public class Interpreter   {
 				}
 				else if(entrada.startsWith("put")) {
 					String parametroConParentesis = entrada.substring(4);
-					String parametro = parametroConParentesis.replace(")", "");
+					String parametro = parametroConParentesis.replace(");", "");
 					String[] tokens = parametro.split(",");
 
 					String objeto = tokens[1];
@@ -251,9 +254,9 @@ public class Interpreter   {
 					if(objeto.equals("chips"))
 					{
 						int n = 0;
-						if(false)
+						if(map.containsKey(nStr))
 						{
-							n = (int) map.get(nStr);
+							n = map.get(nStr);
 							world.putChips(n);
 						}
 
@@ -269,10 +272,11 @@ public class Interpreter   {
 					if(objeto.equals("balloons"))
 					{
 						int n = 0;
-						if(false)
+						if(map.containsKey(nStr))
 						{
-							n = (int) map.get(nStr);
+							n = map.get(nStr);
 							world.putBalloons(n);
+							System.out.println("h");
 						}
 						else {
 							n = Integer.parseInt(nStr);
@@ -284,7 +288,7 @@ public class Interpreter   {
 				}
 				else if(entrada.startsWith("pick")) {
 					String parametroConParentesis = entrada.substring(5);
-					String parametro = parametroConParentesis.replace(")", "");
+					String parametro = parametroConParentesis.replace(");", "");
 					String[] tokens = parametro.split(",");
 
 					String objeto = tokens[1];
@@ -293,7 +297,7 @@ public class Interpreter   {
 					if(objeto.equals("chips"))
 					{
 						int n = 0;
-						if(false)
+						if(map.containsKey(nStr))
 						{
 							n = (int) map.get(nStr);
 							world.pickChips(n);
@@ -310,7 +314,7 @@ public class Interpreter   {
 					if(objeto.equals("balloons"))
 					{
 						int n = 0;
-						if(false)
+						if(map.containsKey(nStr))
 						{
 							n = (int) map.get(nStr);
 							world.grabBalloons(n);
@@ -324,7 +328,7 @@ public class Interpreter   {
 
 				else if(entrada.startsWith("moveDir")) {
 					String parametroConParentesis = entrada.substring(8);
-					String parametro = parametroConParentesis.replace(")", "");
+					String parametro = parametroConParentesis.replace(");", "");
 					String[] tokens = parametro.split(",");
 
 					String direccion = tokens[1];
@@ -337,8 +341,9 @@ public class Interpreter   {
 					//CASO NORTH
 					if(posicionActual== RobotWorldDec.NORTH)
 					{
-						if(false)
+						if(map.containsKey(nStr))
 						{
+							n = map.get(nStr);
 
 						}
 						else {
@@ -367,8 +372,9 @@ public class Interpreter   {
 					//CASO EAST
 					if(posicionActual== RobotWorldDec.EAST)
 					{
-						if(false)
+						if(map.containsKey(nStr))
 						{
+							n = map.get(nStr);
 
 						}
 						else {
@@ -396,8 +402,9 @@ public class Interpreter   {
 					//CASO SOUTH
 					if(posicionActual== RobotWorldDec.SOUTH)
 					{
-						if(false)
+						if(map.containsKey(nStr))
 						{
+							n = map.get(nStr);
 
 						}
 						else {
@@ -424,8 +431,9 @@ public class Interpreter   {
 					//CASO WEST
 					if(posicionActual== RobotWorldDec.WEST)
 					{
-						if(false)
+						if(map.containsKey(nStr))
 						{
+							n = map.get(nStr);
 
 						}
 						else {
@@ -492,7 +500,9 @@ public class Interpreter   {
 					}
 
 					int n = 0;
-					if (false) {
+					if(map.containsKey(pasos))
+					{
+						n = map.get(pasos);
 
 					}
 					else {
