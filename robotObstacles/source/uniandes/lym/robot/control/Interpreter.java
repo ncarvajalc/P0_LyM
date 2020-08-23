@@ -331,23 +331,23 @@ public class Interpreter   {
 					String nStr = tokens[0];
 
 					int posicionActual = world.getFacing();
-					
+
 					int n = 0;
-					
+
 					//CASO NORTH
 					if(posicionActual== RobotWorldDec.NORTH)
 					{
 						if(false)
 						{
-							
+
 						}
 						else {
 							n = Integer.parseInt(nStr);
 						}
-						
+
 						System.out.println(n);
-						
-						
+
+
 						if(direccion.equals("front"))
 						{
 							world.moveVertically(-n);
@@ -369,13 +369,13 @@ public class Interpreter   {
 					{
 						if(false)
 						{
-							
+
 						}
 						else {
 							n = Integer.parseInt(nStr);
 						}
-						
-						
+
+
 						if(direccion.equals("front"))
 						{
 							world.moveHorizontally(n);
@@ -392,19 +392,19 @@ public class Interpreter   {
 							world.moveHorizontally(-n);
 						}
 					}
-					
+
 					//CASO SOUTH
 					if(posicionActual== RobotWorldDec.SOUTH)
 					{
 						if(false)
 						{
-							
+
 						}
 						else {
 							n = Integer.parseInt(nStr);
 						}
-						
-						
+
+
 						if(direccion.equals("front"))
 						{
 							world.moveVertically(n);
@@ -426,13 +426,13 @@ public class Interpreter   {
 					{
 						if(false)
 						{
-							
+
 						}
 						else {
 							n = Integer.parseInt(nStr);
 						}
-						
-						
+
+
 						if(direccion.equals("front"))
 						{
 							world.moveHorizontally(-n);
@@ -451,6 +451,105 @@ public class Interpreter   {
 					}
 				}
 
+				else if(entrada.startsWith("moveInDir"))
+				{
+					String parametroConParentesis = entrada.substring(10);
+					String parametros = parametroConParentesis.replace(")", "");
+					String[] tokens = parametros.split(",");
+
+					String pasos = tokens[0];
+					String parametro = tokens[1];
+
+					int orient2= 0;
+					boolean encontro = false;
+					if(parametro.startsWith("north"))
+					{
+						orient2 = 0;
+					}
+					else if(parametro.startsWith("south"))
+					{
+						orient2 = 1;
+					}
+					else if(parametro.startsWith("east"))
+					{
+						orient2 = 2;
+					}
+					else {
+						orient2 = 3;
+					}
+					int orient = world.getFacing();
+					while(!encontro)
+					{
+						if(orient!= orient2)
+						{
+							world.turnRight();
+							orient = world.getFacing();
+						}
+						else {
+							encontro = true;
+						}
+
+					}
+
+					int n = 0;
+					if (false) {
+
+					}
+					else {
+						n = Integer.parseInt(pasos);
+						world.moveForward(n);
+					}
+				}
+
+				else if(entrada.equals("skip"))
+				{
+					output.append("Skipped");
+				}
+				else if(entrada.startsWith("facing")|| entrada.startsWith("not"))
+				{
+					String parametroConParentesis = "";
+
+					if (entrada.startsWith("facing")) {
+						parametroConParentesis = entrada.substring(7);
+
+						String parametro = parametroConParentesis.replace(")", "");
+
+						if(parametro.equals("north") && world.facingNorth())
+							output.append("true");
+
+						else if(parametro.equals("south") && world.facingSouth())
+							output.append("true");
+
+						else if(parametro.equals("east") && world.facingEast())
+							output.append("true");
+
+						else if(parametro.equals("west") && world.facingWest())
+							output.append("true");
+						else {
+							output.append("false");
+						}
+					}
+					else if (entrada.startsWith("not")) {
+						parametroConParentesis = entrada.substring(11);
+
+						String parametro = parametroConParentesis.replace(")", "");
+
+						if(parametro.equals("north") && world.facingNorth())
+							output.append("false");
+
+						else if(parametro.equals("south") && world.facingSouth())
+							output.append("false");
+
+						else if(parametro.equals("east") && world.facingEast())
+							output.append("false");
+
+						else if(parametro.equals("west") && world.facingWest())
+							output.append("false");
+						else {
+							output.append("true");
+						}
+					}
+				}
 			}
 			catch(Error e ){
 				output.append("Error!!!  "+e.getMessage());
