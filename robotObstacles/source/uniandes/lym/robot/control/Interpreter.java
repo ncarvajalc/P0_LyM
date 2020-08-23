@@ -131,17 +131,17 @@ public class Interpreter   {
 			String entrada = inst[i];
 			try {
 
-				if(entrada.startsWith("VARS"));
+				if(entrada.startsWith("VARS"))
 				{
 
-					String cadena = entrada.substring(4);
+					String cadena = entrada.substring(5);
 					String[] variables = cadena.split(",");
 					for (int j = 0; j < variables.length; j++) {
 						map.put(variables[j], 0);
 					}
 
 				}
-				if(entrada.startsWith("assing"))
+				else if(entrada.startsWith("assign"))
 				{
 
 					String cadena = entrada.substring(7, 10);
@@ -154,7 +154,7 @@ public class Interpreter   {
 
 
 				}
-				if (entrada.startsWith("move") && !entrada.contains("moveDir") && !entrada.contains("moveInDir"))
+				else if (entrada.startsWith("move") && !entrada.contains("moveDir") && !entrada.contains("moveInDir"))
 				{
 
 
