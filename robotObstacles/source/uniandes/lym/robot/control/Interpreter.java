@@ -154,7 +154,7 @@ public class Interpreter   {
 
 
 				}
-				if (entrada.startsWith("move"))
+				if (entrada.startsWith("move") && !entrada.contains("moveDir") && !entrada.contains("moveInDir"))
 				{
 
 
@@ -248,7 +248,7 @@ public class Interpreter   {
 					String nStr = tokens[0];
 					System.out.println(nStr);
 					//CASO CHIPS
-					if(objeto.contains("chips"))
+					if(objeto.equals("chips"))
 					{
 						int n = 0;
 						if(false)
@@ -290,7 +290,7 @@ public class Interpreter   {
 					String objeto = tokens[1];
 					String nStr = tokens[0];
 					//CASO CHIPS
-					if(objeto.contains("chips"))
+					if(objeto.equals("chips"))
 					{
 						int n = 0;
 						if(false)
@@ -307,7 +307,7 @@ public class Interpreter   {
 					}
 
 					//CASO BALLOONS
-					if(objeto.contains("balloons"))
+					if(objeto.equals("balloons"))
 					{
 						int n = 0;
 						if(false)
@@ -331,21 +331,130 @@ public class Interpreter   {
 					String nStr = tokens[0];
 
 					int posicionActual = world.getFacing();
-
-
+					
+					int n = 0;
+					
+					//CASO NORTH
+					if(posicionActual== RobotWorldDec.NORTH)
+					{
+						if(false)
+						{
+							
+						}
+						else {
+							n = Integer.parseInt(nStr);
+						}
+						
+						System.out.println(n);
+						
+						
+						if(direccion.equals("front"))
+						{
+							world.moveVertically(-n);
+						}
+						else if(direccion.equals("right")) {
+							world.moveHorizontally(n);
+						}
+						else if(direccion.equals("left"))
+						{
+							world.moveHorizontally(-n);
+						}
+						else if(direccion.equals("back"))
+						{
+							world.moveVertically(n);
+						}
+					}
+					//CASO EAST
+					if(posicionActual== RobotWorldDec.EAST)
+					{
+						if(false)
+						{
+							
+						}
+						else {
+							n = Integer.parseInt(nStr);
+						}
+						
+						
+						if(direccion.equals("front"))
+						{
+							world.moveHorizontally(n);
+						}
+						else if(direccion.equals("right")) {
+							world.moveVertically(n);
+						}
+						else if(direccion.equals("left"))
+						{
+							world.moveVertically(-n);
+						}
+						else if(direccion.equals("back"))
+						{
+							world.moveHorizontally(-n);
+						}
+					}
+					
+					//CASO SOUTH
+					if(posicionActual== RobotWorldDec.SOUTH)
+					{
+						if(false)
+						{
+							
+						}
+						else {
+							n = Integer.parseInt(nStr);
+						}
+						
+						
+						if(direccion.equals("front"))
+						{
+							world.moveVertically(n);
+						}
+						else if(direccion.equals("right")) {
+							world.moveHorizontally(-n);
+						}
+						else if(direccion.equals("left"))
+						{
+							world.moveHorizontally(n);
+						}
+						else if(direccion.equals("back"))
+						{
+							world.moveVertically(-n);
+						}
+					}
+					//CASO WEST
+					if(posicionActual== RobotWorldDec.WEST)
+					{
+						if(false)
+						{
+							
+						}
+						else {
+							n = Integer.parseInt(nStr);
+						}
+						
+						
+						if(direccion.equals("front"))
+						{
+							world.moveHorizontally(-n);
+						}
+						else if(direccion.equals("right")) {
+							world.moveVertically(-n);
+						}
+						else if(direccion.equals("left"))
+						{
+							world.moveVertically(n);
+						}
+						else if(direccion.equals("back"))
+						{
+							world.moveHorizontally(n);
+						}
+					}
 				}
 
 			}
 			catch(Error e ){
 				output.append("Error!!!  "+e.getMessage());
 			}
-
-
-
-
-
-
-
 		}
 
 
