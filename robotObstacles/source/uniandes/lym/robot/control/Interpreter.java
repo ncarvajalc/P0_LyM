@@ -125,7 +125,7 @@ public class Interpreter   {
 		
 		StringBuffer output=new StringBuffer("SYSTEM RESPONSE: -->\n");	
 		
-		HashMap map = new HashMap();
+		HashMap<String, Integer> map = new HashMap<String, Integer> ();
 		String[] inst = input.split("\n");
 		for (int i = 0; i < inst.length; i++) {
 		String entrada = inst[i];
@@ -139,47 +139,46 @@ public class Interpreter   {
 			for (int j = 0; j < variables.length; j++) {
 				map.put(variables[j], 0);
 			}
-			output.append("VARS \n");
+			
 		}
 		if(entrada.startsWith("assing"))
 		{
 			
 			String cadena = entrada.substring(7, 10);
 			String[] parametros = cadena.split(",");
-			for (int j = 0; j < map.size(); j++) {
+			int valor = Integer.parseInt(parametros[1]);
 				if(map.containsKey(parametros[0]))
 				{
-					map.replace(parametros[0], 0, parametros[1]);
+					map.replace(parametros[0], valor);
 				}
-			}
+			
 				
 		}
 		 if (entrada.startsWith("move"))
 		 {
 			 
-			 boolean variableMap = false;
+			 
 			 char numero = entrada.charAt(5);
 			 int numMovimientos = 0;
-			 for (int j = 0; j < map.size(); j++) {
-					if(map.containsKey(numero))
-					{
-						numMovimientos = (int) map.get(numero);
-						world.moveForward(numMovimientos);
-						variableMap = true; 
-					}
-					
-		 }
-			 if(!variableMap)
+			 if(map.containsKey(String.valueOf(numero)))
 			 {
-				 numMovimientos = (int) numero; 
+				 numMovimientos =  map.get(String.valueOf(numero));
 				 world.moveForward(numMovimientos);
 			 }
+			 else {
+			 
+			 numMovimientos = Character.getNumericValue(numero);
+			 world.moveForward(numMovimientos);
+			 }
+					
+		 }
+			
 			 
 			 
 			 
 			
 	 
-		}
+		
 		 else if(entrada.startsWith("turn"))
 		 {
 			 output.append("turn");
@@ -203,7 +202,7 @@ public class Interpreter   {
 		 else if(entrada.startsWith("face"))
 		 {
 			 String parametro = entrada.substring(5);
-			 int orient2;
+			 int orient2= 0;
 			 boolean encontro = false;
 			 if(parametro.startsWith("north"))
 			 {
@@ -223,12 +222,14 @@ public class Interpreter   {
 			 int orient = world.getFacing();
 			 while(!encontro)
 			 {
-				 if(orient == orient2);
+				 if(orient!= orient2)
 				 {
-					 encontro = true;
-				 } 
 					 world.turnRight();
-					
+					 orient = world.getFacing();
+				 }
+				 else {
+					 encontro = true;
+				 }
 				 
 			 }
 			 
