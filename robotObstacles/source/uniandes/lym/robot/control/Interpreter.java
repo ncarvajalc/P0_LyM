@@ -127,8 +127,11 @@ public class Interpreter   {
 
 		HashMap<String, Integer> map = new HashMap<String, Integer> ();
 		String[] inst = input.split("\n");
+		if(input.contains("ROBOT_R") && input.contains("BEGIN")&& input.contains("END") )
+		{	
 		for (int i = 0; i < inst.length; i++) {
 			String entrada = inst[i];
+			
 			try {
 				
 
@@ -176,7 +179,7 @@ public class Interpreter   {
 
 				else if(entrada.startsWith("turn"))
 				{
-					output.append("turn");
+					
 					String parametro = entrada.substring(5);
 					if(parametro.startsWith("right"))
 					{
@@ -188,7 +191,7 @@ public class Interpreter   {
 						world.turnRight();
 						world.turnRight();
 					}
-					else {
+					else if (parametro.startsWith("around")){
 						world.turnRight();
 						world.turnRight();
 					}
@@ -558,7 +561,10 @@ public class Interpreter   {
 				output.append("Error!!!  "+e.getMessage());
 			}
 		}
+		}
 		return output.toString();
+		
+	
 	}
 
 
