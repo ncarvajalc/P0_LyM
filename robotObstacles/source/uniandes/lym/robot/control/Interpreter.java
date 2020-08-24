@@ -154,8 +154,6 @@ public class Interpreter   {
 					{
 						map.replace(parametros[0], valor);
 					}
-
-
 				}
 				else if (entrada.startsWith("move") && !entrada.contains("moveDir") && !entrada.contains("moveInDir"))
 				{
@@ -175,12 +173,6 @@ public class Interpreter   {
 					}
 
 				}
-
-
-
-
-
-
 
 				else if(entrada.startsWith("turn"))
 				{
@@ -246,9 +238,9 @@ public class Interpreter   {
 					String parametro = parametroConParentesis.replace(");", "");
 					String[] tokens = parametro.split(",");
 
-					String objeto = tokens[1];
+					String objeto = tokens[1].replace(" ", "");;
 					System.out.println(objeto);
-					String nStr = tokens[0];
+					String nStr = tokens[0].replace(" ", "");;
 					System.out.println(nStr);
 					//CASO CHIPS
 					if(objeto.equals("chips"))
@@ -291,8 +283,8 @@ public class Interpreter   {
 					String parametro = parametroConParentesis.replace(");", "");
 					String[] tokens = parametro.split(",");
 
-					String objeto = tokens[1];
-					String nStr = tokens[0];
+					String objeto = tokens[1].replace(" ", "");;
+					String nStr = tokens[0].replace(" ", "");;
 					//CASO CHIPS
 					if(objeto.equals("chips"))
 					{
@@ -331,8 +323,8 @@ public class Interpreter   {
 					String parametro = parametroConParentesis.replace(");", "");
 					String[] tokens = parametro.split(",");
 
-					String direccion = tokens[1];
-					String nStr = tokens[0];
+					String direccion = tokens[1].replace(" ", "");;
+					String nStr = tokens[0].replace(" ", "");;
 
 					int posicionActual = world.getFacing();
 
@@ -465,8 +457,8 @@ public class Interpreter   {
 					String parametros = parametroConParentesis.replace(")", "");
 					String[] tokens = parametros.split(",");
 
-					String pasos = tokens[0];
-					String parametro = tokens[1];
+					String pasos = tokens[0].replace(" ", "");;
+					String parametro = tokens[1].replace(" ", "");;
 
 					int orient2= 0;
 					boolean encontro = false;
@@ -522,7 +514,7 @@ public class Interpreter   {
 					if (entrada.startsWith("facing")) {
 						parametroConParentesis = entrada.substring(7);
 
-						String parametro = parametroConParentesis.replace(")", "");
+						String parametro = parametroConParentesis.replace(");", "");
 
 						if(parametro.equals("north") && world.facingNorth())
 							output.append("true");
@@ -543,6 +535,7 @@ public class Interpreter   {
 						parametroConParentesis = entrada.substring(11);
 
 						String parametro = parametroConParentesis.replace(")", "");
+						parametro = parametro.replace(";", "");
 
 						if(parametro.equals("north") && world.facingNorth())
 							output.append("false");
@@ -565,11 +558,7 @@ public class Interpreter   {
 				output.append("Error!!!  "+e.getMessage());
 			}
 		}
-
-
-
 		return output.toString();
-
 	}
 
 
